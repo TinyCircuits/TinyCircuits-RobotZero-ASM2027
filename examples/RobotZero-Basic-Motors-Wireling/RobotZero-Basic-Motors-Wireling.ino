@@ -34,7 +34,7 @@ void setup() {
   Wireling.selectPort(0);
 
   SerialMonitorInterface.begin(9600);
-  while (!SerialMonitorInterface); // Halt everything until Serial Monitor is opened
+//  while (!SerialMonitorInterface); // Halt everything until Serial Monitor is opened
   Wire.begin();
 
   // Initialize stepper motor driver
@@ -55,7 +55,7 @@ void setup() {
     SerialMonitorInterface.println("Found sensor");
   } else {
     SerialMonitorInterface.println("No TCS34725 found ... check your connections");
-    while (1);
+//    while (1);
   }
 }
 
