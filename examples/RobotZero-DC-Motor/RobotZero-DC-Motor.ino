@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------
-//  TinyCircuits Robot Kit Examples
-//  Last Updated 24 Feb 2020
+//  TinyCircuits RobotZero DC Motor and stepper motor example
+//  Last Updated 28 Oct 2020
 //
 //
 //
@@ -22,19 +22,38 @@ int maxPWM = 10000;
 int steps = 300;
 int stepSize = maxPWM / steps;
 
+bool useDcMotors = true; 
+
 void setup() {
   SerialMonitorInterface.begin(115200);
   Wire.begin();
-  stepperInit();
+  if (useDcMotors) {
+    DcMotorInit(maxPWM);
+  } else {
+    stepperInit();
+  }
   delay(100);
   setMotorCurrent(100);
-  initPWM(maxPWM);
-  //setDCMotor
 }
 
-
-
 void loop() {
+  if (useDcMotors) {
+    DcMotorLoop();
+  } else {
+    stepperLoop();
+  }
+}
+
+void stepperLoop() {
+  setMotor(1, 10, 1000);
+  setMotor(2, -10, 1000);
+  while (isMotorSpinning());
+  setMotor(1, -10, 1000);
+  setMotor(2, 10, 1000);
+  while (isMotorSpinning());
+}
+
+void DcMotorLoop() {
   int i;
   for (i = -maxPWM; i < maxPWM; i += stepSize) {
     delay(10);

@@ -12,18 +12,35 @@ const int stepPin1 = 44;
 const int dirPin1 = 27;
 const int stepPin2 = 45;
 const int dirPin2 = 30;
-const int enablePin = 26;
+const int enablePin = 26; //nSLEEP
+const int configPin = 31;
 
-void stepperInit() {
+
+void pinInit() {
   pinMode(stepPin1, OUTPUT);
   pinMode(dirPin1, OUTPUT);
   pinMode(stepPin2, OUTPUT);
   pinMode(dirPin2, OUTPUT);
   pinMode(enablePin, OUTPUT);
-  digitalWrite(enablePin, HIGH);
+  pinMode(configPin, OUTPUT);
+  digitalWrite(enablePin, LOW);
+  delay(1);
+}
+
+void stepperInit() {
+  pinInit();
   tcDisable();
   tcConfigure(2000);
   tcStartCounter();
+  digitalWrite(configPin, HIGH);
+  digitalWrite(enablePin, HIGH);
+}
+
+void DcMotorInit(uint16_t maxPWM) {
+  pinInit();
+  initPWM(maxPWM);
+  digitalWrite(configPin, LOW);
+  digitalWrite(enablePin, HIGH);
 }
 
 void setMotorCurrent(byte val) {
