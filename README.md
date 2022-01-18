@@ -1,7 +1,7 @@
 # TinyCircuits RobotZero ASM2027
 # ASM2026 Rev3
 
-The design files are located under design_files/ for the TinyCircuits ASM2027 Rev 3 PCB. This is a processor board with several different connectors (for Motors, Servos, and Whiskers) that add a great range of customizable functionality. 
+The design files are located under design_files/ for the TinyCircuits ASM2027 Rev 4 PCB, and Rev3 schematic pdf. This is a processor board with several different connectors (for Motors, Servos, and [Wirelings](https://tinycircuits.com/pages/wireling-overview)) that add a great range of customizable functionality.
 
 Format is in Cadsoft Eagle format - Eagle version 6.2 was used for the original design.
 
